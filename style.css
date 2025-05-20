@@ -1,0 +1,963 @@
+/* General body styling */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #05080f; /* Default dark background */
+    color: #cce7ff; /* Default light text color */
+    -webkit-font-smoothing: antialiased; /* Smoother fonts on WebKit */
+    -moz-osx-font-smoothing: grayscale; /* Smoother fonts on Firefox */
+}
+
+/* Header and navigation styling */
+header {
+    background-color: rgba(5, 8, 15, 0.85); /* Slightly transparent dark background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
+    color: #cce7ff;
+    padding: 1rem 0; /* Adjusted padding */
+    text-align: center;
+    position: fixed; /* Make header sticky */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it's above other content */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow for depth */
+    border-bottom: 1px solid #00aaff22; /* Slightly more visible border */
+    transition: background-color 0.3s ease, padding 0.3s ease; /* For scroll effects if added later */
+}
+
+/* Optional: Style for when header might be scrolled (if we add JS later)
+header.scrolled {
+    background-color: rgba(10, 20, 35, 0.95);
+    padding: 0.8rem 0;
+}
+*/
+
+nav {
+    max-width: 1200px; /* Align with content width */
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex; /* For logo and nav items alignment */
+    justify-content: space-between; /* Logo on left, nav on right */
+    align-items: center;
+}
+
+nav .logo-placeholder { /* Simple text logo placeholder */
+    font-size: 1.9rem; /* Slightly larger */
+    font-weight: bold;
+    color: #00aaff;
+    text-decoration: none;
+    letter-spacing: -1px;
+    transition: color 0.3s ease;
+}
+nav .logo-placeholder:hover {
+    color: #33ccff;
+}
+
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Reset margin */
+    display: flex; /* Align nav items horizontally */
+    gap: 25px; /* Increased space between nav items */
+}
+
+nav ul li {
+    display: inline;
+    /* margin: 0 10px; */ /* Replaced by gap in ul */
+}
+
+nav ul li a {
+    color: #e0f0ff; /* Slightly brighter default link color */
+    text-decoration: none;
+    font-size: 1.05rem; /* Slightly larger */
+    font-weight: 500; /* Medium weight */
+    padding: 10px 15px; /* Increased padding */
+    border-radius: 8px; /* Slightly more rounded */
+    position: relative; /* For pseudo-element underline */
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+}
+
+nav ul li a::after { /* Underline effect */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px; /* Position underline below text */
+    left: 50%;
+    background-color: #00aaff;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav ul li a:hover::after, nav ul li a.active-link-placeholder::after {
+    width: calc(100% - 30px); /* Width of padding */
+    left: 15px; /* Align with padding */
+}
+
+
+nav ul li a:hover, nav ul li a.active-link-placeholder { /* Placeholder for active link */
+    color: #ffffff;
+    background-color: rgba(0, 170, 255, 0.15); /* More subtle background on hover */
+    transform: translateY(-2px);
+}
+
+nav ul li a:active {
+    transform: translateY(0); /* Reset on active */
+    background-color: rgba(0, 170, 255, 0.25); /* Slightly darker on active */
+}
+
+
+/* Adjust main content padding to account for fixed header */
+main {
+    padding-top: 75px; /* Adjusted based on new header padding (1rem * 2 + text height ~70-75px) */
+}
+
+section {
+    /* Common styles for sections like padding and overflow are already defined below */
+    /* This just ensures the section specific padding is maintained if any section removes the global one */
+    padding: 60px 20px; 
+    overflow: hidden; 
+}
+
+/* Hero section styling */
+#hero {
+    background: linear-gradient(120deg, #0d1a2e 0%, #1a3a66 60%, #0077b3 100%); /* Dark blue gradient, adjusted angle and added a mid-point color */
+    background-size: 250% 250%; /* For gradient animation, larger size for smoother/slower animation */
+    color: #fff;
+    padding: 80px 20px;
+    animation: animatedHeroBackground 20s ease infinite, fadeInDown 0.5s ease-out forwards; /* Added background animation, and initial fade in for the section itself */
+    opacity: 0; /* Initial state for section fade-in */
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scrollbars from animations */
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.hero-text {
+    flex: 1;
+    padding-right: 40px;
+    /* animation: slideInFromLeft 1s ease-out forwards; */ /* Will be replaced by individual animations */
+}
+
+.main-headline {
+    font-size: 4.2rem; /* Slightly larger font size */
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    letter-spacing: -2px; /* Tighter letter spacing */
+    color: #ffffff; /* Brighter white for contrast */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3), 0 0 30px rgba(0, 170, 255, 0.2); /* Enhanced Subtle glow */
+    animation: fadeInDown 0.8s 0.2s ease-out forwards; /* name duration delay timing fill-mode */
+    opacity: 0; /* Initial state for animation */
+}
+
+.sub-headline {
+    font-size: 2.3rem; /* Slightly larger */
+    font-weight: 300; /* Lighter font weight */
+    margin-bottom: 1.2rem; /* Adjusted margin */
+    color: #cce7ff; /* Light blue, complementary to the background */
+    animation: fadeInDown 0.8s 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.tagline {
+    font-size: 1.25rem; /* Slightly larger */
+    margin-bottom: 2.5rem; /* Adjusted margin */
+    color: #a7c5e8; /* Softer blue */
+    line-height: 1.65; /* Adjusted line-height */
+    animation: fadeInUp 0.8s 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.cta-button {
+    background-color: #00aaff; /* Bright, cyber blue */
+    color: #fff;
+    padding: 15px 35px; /* Slightly more padding */
+    text-decoration: none;
+    border-radius: 50px; /* Pill shape */
+    font-size: 1.15rem; /* Slightly larger */
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 170, 255, 0.4);
+    display: inline-block; /* Needed for animation if it's an <a> */
+    animation: fadeInUp 0.8s 1.1s ease-out forwards;
+    opacity: 0;
+}
+
+.cta-button:hover {
+    background-color: #0088cc; /* Darker shade on hover */
+    transform: translateY(-4px) scale(1.03); /* Enhanced hover effect */
+    box-shadow: 0 8px 20px rgba(0, 170, 255, 0.5); /* Enhanced shadow */
+}
+
+.cta-button:active {
+    transform: translateY(-2px) scale(0.98); /* Click effect */
+    box-shadow: 0 4px 10px rgba(0, 170, 255, 0.4);
+}
+
+.hero-visual {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px; /* For 3D effects if we add them */
+}
+
+.hai-bot-placeholder {
+    width: 300px; /* Adjust as needed */
+    height: 300px;
+    background: radial-gradient(circle, #00aaff, #0055aa);
+    border-radius: 50%; /* Circular shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.6), 0 0 60px rgba(0, 170, 255, 0.4) inset;
+    animation: pulseV2 2.5s infinite ease-in-out, subtleFloat 8s infinite ease-in-out; /* Adjusted timing, new float animation */
+    position: relative; /* For pseudo-elements if needed for more effects */
+}
+
+/* Enhanced Pulse (pulseV2) and New Subtle Float Animation */
+@keyframes pulseV2 { /* Renamed to avoid conflict if old pulse is used elsewhere */
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(0, 170, 255, 0.5), 0 0 60px rgba(0, 170, 255, 0.3) inset;
+    }
+    50% {
+        transform: scale(1.08); /* Slightly more pronounced pulse */
+        box-shadow: 0 0 50px rgba(0, 170, 255, 0.8), 0 0 75px rgba(0, 170, 255, 0.5) inset;
+    }
+}
+
+@keyframes subtleFloat {
+    0%, 100% {
+        transform: translateY(0px) rotateX(5deg) rotateY(0deg);
+    }
+    25% {
+        transform: translateY(-12px) rotateX(3deg) rotateY(8deg);
+    }
+    50% {
+        transform: translateY(0px) rotateX(5deg) rotateY(15deg);
+    }
+    75% {
+        transform: translateY(-8px) rotateX(7deg) rotateY(5deg);
+    }
+}
+
+/* Keyframe animations */
+/* Removed slideInFromLeft, replaced by fadeInDown and fadeInUp */
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(0, 170, 255, 0.6), 0 0 60px rgba(0, 170, 255, 0.4) inset;
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 45px rgba(0, 170, 255, 0.8), 0 0 70px rgba(0, 170, 255, 0.5) inset;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(0, 170, 255, 0.6), 0 0 60px rgba(0, 170, 255, 0.4) inset;
+    }
+}
+
+/* Removed rotate3D as it's replaced by subtleFloat */
+
+@keyframes animatedHeroBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* Info Sections Styling */
+#info-sections {
+    background-color: #0b121e; /* Slightly lighter than hero bg for depth */
+    /* padding: 60px 20px; */ /* Common padding now on 'section' */
+    color: #cce7ff; /* Light blue for text, good contrast on dark bg */
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-around; /* Distribute cards evenly */
+    align-items: stretch; /* Make cards same height if content varies */
+    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+    gap: 30px; /* Space between cards */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+.info-card {
+    background: #1a2a45; /* Dark blue, slightly lighter than section bg */
+    border-radius: 15px; /* More rounded corners */
+    padding: 30px;
+    flex-basis: calc(50% - 40px); /* Two cards per row, accounting for gap */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 170, 255, 0.1) inset; /* Softer shadow + subtle inner glow */
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; /* Slightly longer transition */
+    border: 1px solid #00aaff33; /* Subtle cyber-blue border */
+    opacity: 0; /* Initial state for animation */
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+/* Stagger animation for info cards */
+.info-card:nth-child(1) { animation-delay: 0.2s; }
+.info-card:nth-child(2) { animation-delay: 0.4s; }
+
+
+.info-card:hover {
+    transform: translateY(-12px); /* Slightly more lift */
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), 0 0 20px rgba(0, 170, 255, 0.25) inset; /* Enhanced shadow */
+    border-color: #00aaff77; /* Brighter border on hover */
+}
+
+.info-card h2 {
+    font-size: 1.8rem;
+    color: #ffffff; /* White for headings */
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid #00aaff; /* Cyber blue underline */
+    padding-bottom: 10px;
+    display: inline-block; /* To make border-bottom only as wide as text */
+}
+
+.info-card p, .info-card ul {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.info-card ul {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0;
+}
+
+.info-card ul li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.info-card ul li::before {
+    content: '✓'; /* Checkmark or other futuristic icon */
+    color: #00aaff; /* Cyber blue */
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.info-card strong {
+    color: #87cefa; /* Lighter blue for emphasis */
+}
+
+.info-icon {
+    font-size: 2.5rem;
+    color: #00aaff;
+    text-align: center;
+    margin-bottom: 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-icon span { /* For $HAI text */
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #00aaff;
+    border-radius: 10px;
+    display: inline-block;
+    line-height: 1;
+}
+
+.info-icon.hedera-icon svg {
+    width: 50px;
+    height: 50px;
+    fill: #00aaff;
+}
+
+/* Features Section Styling */
+#features {
+    /* padding: 60px 20px; */ /* Common padding now on 'section' */
+    background-color: #060c14; /* Even darker for contrast with info-cards */
+    text-align: center;
+    color: #cce7ff;
+}
+
+.section-title {
+    font-size: 2.8rem; /* Slightly larger */
+    color: #ffffff;
+    margin-bottom: 15px; /* Adjusted margin */
+    text-transform: uppercase;
+    letter-spacing: 1.5px; /* Adjusted letter spacing */
+    text-shadow: 0 0 10px rgba(0, 170, 255, 0.1);
+}
+
+.section-subtitle {
+    font-size: 1.25rem; /* Slightly larger */
+    color: #a7c5e8;
+    margin-bottom: 50px; /* Adjusted margin */
+    max-width: 750px; /* Adjusted max-width */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 35px; /* Slightly increased gap */
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.feature-card {
+    background: #101c30; /* Slightly lighter than section bg, darker than info-card */
+    border-radius: 12px; /* Slightly more rounded */
+    padding: 30px; /* Increased padding */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 5px rgba(0,170,255,0.05) inset; /* Added subtle inset */
+    border: 1px solid #00aaff44; /* Subtler border */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.4s ease; /* Smoother cubic-bezier */
+    display: flex;
+    flex-direction: column; /* Ensure consistent layout */
+    opacity: 0; /* Initial state for animation */
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+/* Stagger animation for feature cards */
+.features-grid .feature-card:nth-child(1) { animation-delay: 0.3s; }
+.features-grid .feature-card:nth-child(2) { animation-delay: 0.5s; }
+.features-grid .feature-card:nth-child(3) { animation-delay: 0.7s; }
+.features-grid .feature-card:nth-child(4) { animation-delay: 0.9s; }
+
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.02); /* Added scale */
+    box-shadow: 0 15px 35px rgba(0, 170, 255, 0.35), 0 0 15px rgba(0,170,255,0.15) inset; /* Brighter shadow on hover */
+    border-color: #00aaffaa; /* Brighter border */
+}
+
+.feature-icon {
+    font-size: 2rem; /* Base size, actual icon size set via SVG width/height */
+    color: #00aaff;
+    margin-bottom: 15px;
+    height: 50px; /* Fixed height for icon container */
+    display: flex;
+    align-items: center;
+    /* justify-content: center; /* Uncomment if icons should be centered */
+}
+
+.feature-icon svg {
+    /* SVG styling is mostly inline in HTML for fill, width, height */
+    filter: drop-shadow(0 0 5px rgba(0, 170, 255, 0.7)); /* Glow for SVG icons */
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #a7c5e8; /* Softer text color */
+    flex-grow: 1; /* Allow p to grow, pushing example down if card heights vary */
+}
+
+.feature-card p.example {
+    font-style: italic;
+    color: #87cefa; /* Lighter blue for examples */
+    background-color: rgba(0, 170, 255, 0.05); /* Very subtle background for example */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px; /* Space above example text */
+    font-size: 0.9rem;
+    border-left: 3px solid #00aaff;
+}
+
+/* About Us Section Styling */
+#about-us {
+    /* padding: 60px 20px; */ /* Common padding now on 'section' */
+    background-color: #0b121e; /* Consistent dark background */
+    color: #cce7ff;
+}
+
+#about-us .section-title, #about-us .section-subtitle {
+    text-align: center; /* This is fine, but ensure titles are styled consistently */
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px; /* Increased space between each about-block */
+}
+
+.about-block {
+    display: flex;
+    align-items: center;
+    gap: 45px; /* Increased gap */
+    background-color: #101c30e0; /* Card-like background for blocks, slightly transparent */
+    padding: 35px; /* Increased padding */
+    border-radius: 12px; /* More rounded */
+    border: 1px solid #00aaff28; /* Subtler border than feature cards */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    transition: background-color 0.4s ease, transform 0.4s ease; /* Added transition */
+    opacity: 0; /* Initial state for animation */
+    animation: fadeInUp 0.7s ease-out forwards;
+}
+/* Stagger animation for about blocks */
+.about-block:nth-child(1) { animation-delay: 0.3s; }
+.about-block:nth-child(2) { animation-delay: 0.5s; }
+.about-block:nth-child(3) { animation-delay: 0.7s; }
+
+
+.about-block:hover {
+    background-color: #14233b; /* Slightly lighter on hover */
+    transform: perspective(1000px) translateZ(10px); /* Subtle 3D lift */
+}
+
+.about-block.reverse {
+    flex-direction: row-reverse;
+}
+
+.about-text {
+    flex: 2; /* Text takes more space */
+}
+
+.about-text h3 {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #00aaff55;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.about-text p, .about-text ul {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: #a7c5e8;
+}
+
+.about-text ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.about-text ul li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.about-text ul li::before {
+    content: '»'; /* Different bullet style */
+    color: #00aaff;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.about-text strong {
+    color: #87cefa;
+}
+
+.about-visual {
+    flex: 1; /* Visual takes less space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visual-placeholder {
+    width: 100%;
+    max-width: 300px; /* Max width for placeholders */
+    height: 200px;
+    background-color: #1a2a45; /* Placeholder background */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    color: #5a7ba0; /* Muted text color for placeholder */
+    border: 2px dashed #00aaff66;
+    text-align: center;
+    padding: 10px;
+    /* background-size: cover; */ /* Use this if actual images are linked via style attr */
+    /* background-position: center; */
+}
+
+/* Community Section Styling */
+#community {
+    /* padding: 60px 20px; */ /* Common padding now on 'section' */
+    background-color: #060c14; /* Dark background, similar to features */
+    color: #cce7ff;
+    text-align: center;
+}
+
+#community .section-title, #community .section-subtitle {
+    margin-bottom: 45px; /* Adjusted margin */
+}
+
+.community-content {
+    max-width: 900px; /* Slightly narrower for focus */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content within the section */
+    gap: 45px; /* Adjusted gap */
+}
+
+.community-main-cta {
+    background-color: #101c30e8; /* Slightly transparent */
+    padding: 35px 45px; /* Increased padding */
+    border-radius: 12px; /* More rounded */
+    border: 1px solid #00aaff33;
+    box-shadow: 0 10px 30px rgba(0, 170, 255, 0.15); /* Enhanced shadow */
+    width: 100%;
+    max-width: 650px; /* Slightly wider */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0; /* Initial state for animation */
+    animation: fadeInUp 0.7s 0.3s ease-out forwards;
+}
+
+.community-main-cta:hover {
+    transform: scale(1.02); /* Subtle scale on hover */
+    box-shadow: 0 12px 35px rgba(0, 170, 255, 0.2);
+}
+
+
+.community-icon {
+    margin-bottom: 18px; /* Adjusted margin */
+    color: #00aaff; /* Default color for icons if not specified in SVG */
+}
+
+.community-icon.discord-icon svg {
+    width: 75px; /* Slightly larger */
+    height: auto;
+    fill: #7289DA; /* Discord brand color */
+    filter: drop-shadow(0 0 10px rgba(114, 137, 218, 0.75)); /* Enhanced glow */
+    transition: transform 0.3s ease;
+}
+
+.community-main-cta:hover .community-icon.discord-icon svg {
+    transform: rotate(-5deg) scale(1.05); /* Icon animation on hover */
+}
+
+.community-main-cta h3 {
+    font-size: 2.2rem; /* Larger */
+    color: #ffffff;
+    margin-bottom: 12px; /* Adjusted */
+}
+
+.community-main-cta p {
+    font-size: 1.15rem; /* Larger */
+    color: #a7c5e8;
+    margin-bottom: 30px; /* Adjusted */
+    line-height: 1.65;
+}
+
+.cta-button.discord-button {
+    background-color: #7289DA; /* Discord brand color */
+    color: #fff;
+    padding: 16px 38px; /* Adjusted padding */
+    font-size: 1.25rem; /* Larger */
+    box-shadow: 0 6px 18px rgba(114, 137, 218, 0.45); /* Adjusted shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Added to parent .cta-button already */
+}
+
+.cta-button.discord-button:hover {
+    background-color: #5f73bc; /* Darker Discord color */
+    transform: translateY(-4px) scale(1.05); /* Enhanced hover */
+    box-shadow: 0 10px 25px rgba(114, 137, 218, 0.6); /* Enhanced shadow */
+}
+
+.community-placeholders {
+    display: flex;
+    justify-content: space-around;
+    gap: 35px; /* Adjusted gap */
+    width: 100%;
+    margin-top: 25px; /* Adjusted margin */
+}
+
+.placeholder-card {
+    background-color: #101c30e0; /* Slightly transparent */
+    padding: 30px; /* Increased padding */
+    border-radius: 10px; /* Adjusted */
+    border: 1px solid #00aaff28; /* Adjusted */
+    flex-basis: calc(50% - 25px); /* Adjusted for gap */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0; /* Initial state for animation */
+}
+.community-placeholders .placeholder-card:nth-child(1) { animation: fadeInUp 0.7s 0.5s ease-out forwards; }
+.community-placeholders .placeholder-card:nth-child(2) { animation: fadeInUp 0.7s 0.7s ease-out forwards; }
+
+
+.placeholder-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.placeholder-card .placeholder-icon svg {
+    width: 40px;
+    height: 40px;
+    fill: #00aaff;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 5px rgba(0, 170, 255, 0.5));
+}
+
+.placeholder-card h4 {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.placeholder-card p {
+    font-size: 0.9rem;
+    color: #a7c5e8;
+    line-height: 1.5;
+}
+
+
+/* Placeholder styling */
+.animation-placeholder, .design-placeholder {
+    width: 100%;
+    height: 200px; /* Adjust as needed */
+    background-color: transparent; /* Removed default, will be section specific */
+    /* margin-top: 20px; */ /* Removed */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 40px 20px; /* Increased padding */
+    background-color: #03060a; /* Darker footer bg */
+    color: #a7c5e8; /* Softer text color */
+    margin-top: 60px; /* Space above footer */
+    border-top: 1px solid #00aaff1a; /* Subtle top border */
+}
+
+/* --- Responsive Design --- */
+
+/* Large Desktops (and up, though 1200px is our max-width for content) */
+@media (min-width: 1200px) {
+    /* Adjustments for very large screens if needed, most are handled by max-width */
+    .main-headline { font-size: 4.5rem; }
+    .sub-headline { font-size: 2.5rem; }
+}
+
+/* Tablets and Small Desktops */
+@media (max-width: 992px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-text {
+        padding-right: 0;
+        padding-bottom: 40px;
+    }
+    .main-headline { font-size: 3.5rem; }
+    .sub-headline { font-size: 2rem; }
+    .tagline { font-size: 1.15rem; }
+
+    .info-card {
+        flex-basis: calc(50% - 30px); /* Maintain two columns if space allows, adjust gap */
+    }
+    .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+    .about-block {
+        flex-direction: column !important; /* Force column layout, override .reverse */
+        text-align: center;
+    }
+    .about-visual {
+        margin-top: 20px;
+        max-width: 250px; /* Slightly smaller visual placeholder */
+    }
+    .community-placeholders {
+        flex-direction: column;
+        align-items: center;
+    }
+    .placeholder-card {
+        flex-basis: 80%; /* Allow placeholder cards to take more width in column */
+        max-width: 400px;
+    }
+}
+
+/* Mobile Landscape and Tablets Portrait */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav ul {
+        gap: 15px; /* Reduce gap for nav items */
+        justify-content: center; /* Center nav items */
+        flex-wrap: wrap; /* Allow nav items to wrap */
+    }
+    nav ul li a {
+        font-size: 1rem;
+        padding: 8px 10px;
+    }
+    nav ul li a::after { /* Adjust underline for smaller links */
+        width: calc(100% - 20px);
+        left: 10px;
+    }
+    main {
+        padding-top: 120px; /* Increased padding for wrapped nav */
+    }
+
+    section { padding: 40px 15px; } /* Reduce section padding */
+    #hero { padding: 60px 15px; min-height: 70vh; }
+
+    .main-headline { font-size: 2.8rem; }
+    .sub-headline { font-size: 1.7rem; }
+    .tagline { font-size: 1rem; }
+    .cta-button { font-size: 1rem; padding: 12px 28px; }
+
+    .hai-bot-placeholder {
+        width: 250px;
+        height: 250px;
+        font-size: 2.5rem;
+    }
+
+    .info-card {
+        flex-basis: 100%; /* Single column for info cards */
+    }
+    .info-card h2 { font-size: 1.6rem; }
+    .info-card p, .info-card ul { font-size: 0.95rem; }
+    
+    .section-title { font-size: 2.2rem; }
+    .section-subtitle { font-size: 1.1rem; margin-bottom: 30px; }
+
+    .features-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 25px;
+    }
+    .feature-card { padding: 25px; }
+    .feature-card h3 { font-size: 1.3rem; }
+    .feature-card p { font-size: 0.9rem; }
+
+    .about-content { gap: 40px; }
+    .about-block { padding: 25px; }
+    .about-text h3 { font-size: 1.5rem; }
+    .about-text p, .about-text ul { font-size: 0.95rem; }
+
+    .community-main-cta { padding: 25px 30px; }
+    .community-main-cta h3 { font-size: 1.8rem; }
+    .community-main-cta p { font-size: 1rem; }
+    .cta-button.discord-button { font-size: 1.1rem; padding: 14px 30px; }
+    
+    .placeholder-card {
+        flex-basis: 100%; /* Single column */
+        max-width: none; /* Allow full width */
+        padding: 20px;
+    }
+    .placeholder-card h4 { font-size: 1.2rem; }
+}
+
+/* Mobile Portrait */
+@media (max-width: 576px) {
+    main {
+        padding-top: 140px; /* Further adjust for potentially taller wrapped nav */
+    }
+    #hero { min-height: auto; } /* Allow hero to shrink more */
+    .main-headline { font-size: 2.2rem; letter-spacing: -1px; }
+    .sub-headline { font-size: 1.5rem; }
+    .tagline { font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .cta-button { font-size: 0.9rem; padding: 10px 20px; }
+
+    .hai-bot-placeholder {
+        width: 200px;
+        height: 200px;
+        font-size: 2rem;
+    }
+    @keyframes pulseV2 { /* Less intense pulse for smaller screens */
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.4), 0 0 40px rgba(0, 170, 255, 0.2) inset;
+        }
+        50% {
+            transform: scale(1.05); 
+            box-shadow: 0 0 30px rgba(0, 170, 255, 0.6), 0 0 50px rgba(0, 170, 255, 0.3) inset;
+        }
+    }
+    .hai-bot-placeholder { /* Re-apply animation with potentially new @keyframes if above is specific */
+         animation: pulseV2 2.5s infinite ease-in-out, subtleFloat 8s infinite ease-in-out;
+    }
+
+
+    .section-title { font-size: 1.8rem; }
+    .section-subtitle { font-size: 1rem; }
+
+    .info-icon span { font-size: 2rem; padding: 8px 15px; }
+    .info-icon.hedera-icon svg { width: 40px; height: 40px; }
+
+    .feature-icon svg { width: 36px; height: 36px; }
+    .feature-card p.example { font-size: 0.85rem; padding: 8px; }
+
+    .visual-placeholder { height: 150px; }
+
+    .community-icon.discord-icon svg { width: 60px; }
+    .community-main-cta h3 { font-size: 1.6rem; }
+    .community-main-cta p { font-size: 0.9rem; }
+    .cta-button.discord-button { font-size: 1rem; padding: 12px 25px; }
+
+    .placeholder-card .placeholder-icon svg { width: 32px; height: 32px; }
+    .placeholder-card h4 { font-size: 1.1rem; }
+    .placeholder-card p { font-size: 0.85rem; }
+
+    footer { padding: 30px 15px; margin-top: 40px; }
+}
